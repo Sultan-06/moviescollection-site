@@ -1,12 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
+:root {
+    --accent-green: #b7f45f;
+    --accent-green-hover: #a7e64e;
+    --accent-green-dim: rgba(183, 244, 95, 0.25);
+    --text-main: #ffffff;
+    --text-muted: #a8a4a8;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
 *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   color: white;
   font-family: 'Montserrat', Arial, sans-serif;
 }
 
 
 body {
+    margin: 0;
+    padding: 0;
   /* Set the path to your image */
   background-image: url('avgback.jpg'); 
   
@@ -21,4 +35,188 @@ body {
   
   /* Stretches the image to fully cover the viewport */
   background-size: cover; 
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background: rgba(10, 8, 11, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-main);
+    font-size: 1.65rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: #000;
+    background: linear-gradient(135deg, #c8ff72 0%, var(--accent-green) 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--accent-green-dim);
+}
+
+.logo-icon i {
+    color: #050505;
+    font-size: 1.05rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links li.active a {
+    color: var(--text-main);
+}
+
+.text-sm {
+    font-size: 0.75rem;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.search-bar i {
+    color: var(--text-muted);
+}
+
+.search-bar input {
+    width: 200px;
+    color: var(--text-main);
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.search-bar input::placeholder {
+    color: var(--text-muted);
+}
+
+.add-title-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    color: #000;
+    background: var(--accent-green);
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-title-btn:hover {
+    background: var(--accent-green-hover);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.user-plan {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.hover-icon {
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .search-bar {
+        display: none;
+    }
+
+    .user-info,
+    .hover-icon {
+        display: none;
+    }
+
+    .nav-left,
+    .nav-right {
+        gap: 1rem;
+    }
+
+    .add-title-btn {
+        padding: 0.55rem 0.8rem;
+    }
 }
