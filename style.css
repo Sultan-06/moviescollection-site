@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+*{
+  color: white;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+
+body {
+  /* Set the path to your image */
+  background-image: url('avgback.jpg'); 
+  
+  /* CRITICAL: Keeps the image locked in place during scroll */
+  background-attachment: fixed; 
+  
+  /* Prevents the image from repeating/tiling */
+  background-repeat: no-repeat; 
+  
+  /* Centers the image perfectly */
+  background-position: center center; 
+  
+  /* Stretches the image to fully cover the viewport */
+  background-size: cover; 
+}
