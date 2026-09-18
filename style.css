@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 :root {
-    --accent-green: #b7f45f;
-    --accent-green-hover: #a7e64e;
-    --accent-green-dim: rgba(183, 244, 95, 0.25);
-    --text-main: #ffffff;
-    --text-muted: #a8a4a8;
+    --accent-green: #B8860B; /* Updated to Burnished Gold */
+    --accent-green-hover: #D4AF37; /* Updated to lighter gold for hover */
+    --accent-green-dim: rgba(184, 134, 11, 0.25); /* Gold with opacity */
+    --text-main: #FAF0E6; /* Updated to Antique Ivory */
+    --text-muted: #A9A9A9; /* Updated to softer Grey */
     --border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -13,10 +13,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: white;
+    color: var(--text-main);
     font-family: 'Inter', sans-serif;
 }
-
 
 body {
     margin: 0;
@@ -46,9 +45,9 @@ body {
     align-items: center;
     gap: 2rem;
     padding: 1rem 2rem;
-    background: rgba(10, 8, 11, 0.8);
+    background: rgba(10, 10, 10, 0.85); /* Darkened and made slightly more transparent */
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(184, 134, 11, 0.2); /* Faint gold bottom line */
     position: fixed;
     top: 0;
     left: 0;
@@ -80,7 +79,7 @@ body {
     width: 40px;
     height: 40px;
     color: #000;
-    background: linear-gradient(135deg, #c8ff72 0%, var(--accent-green) 100%);
+    background: linear-gradient(135deg, #FFD700 0%, var(--accent-green) 100%); /* Adjusted gradient for gold */
     border-radius: 10px;
     box-shadow: 0 0 15px var(--accent-green-dim);
 }
@@ -153,6 +152,10 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s ease;
+}
+
+.add-title-btn i {
+    color: #000000;
 }
 
 .add-title-btn:hover {
@@ -249,12 +252,12 @@ body {
 
 .details p {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--text-muted); /* Updated to use global muted text */
     line-height: 1.5;
 }
 
 .details p b {
-    color: white;
+    color: var(--text-main); /* Updated to off-white ivory */
 }
 
 .cards {
@@ -264,11 +267,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: linear-gradient(180deg, #7d5649 0%, #4b312b 100%);
+    background: rgba(15, 15, 15, 0.75); /* Updated from brown gradient to dark glassmorphism */
+    backdrop-filter: blur(6px); /* Added blur effect */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top highlight edge */
     border-radius: 22px;
     overflow: hidden;
     padding: 0 0 12px;
-    box-shadow: 0 15px 30px rgba(38, 20, 15, 0.35);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.45); /* Shadow color updated slightly to match dark theme */
 }
 
 .cards .card-image {
