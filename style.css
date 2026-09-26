@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
 :root {
-    --accent-green: #B8860B; /* Updated to Burnished Gold */
-    --accent-green-hover: #D4AF37; /* Updated to lighter gold for hover */
+    --accent-green: #B8860B; /* Burnished Gold */
+    --accent-green-hover: #D4AF37; /* Lighter gold for hover */
     --accent-green-dim: rgba(184, 134, 11, 0.25); /* Gold with opacity */
-    --text-main: #FAF0E6; /* Updated to Antique Ivory */
-    --text-muted: #A9A9A9; /* Updated to softer Grey */
+    --text-main: #FAF0E6; /* Antique Ivory */
+    --text-muted: #A9A9A9; /* Softer Grey */
     --border-color: rgba(255, 255, 255, 0.1);
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -20,20 +18,13 @@
 body {
     margin: 0;
     padding: 0;
-  /* Set the path to your image */
-  background-image: url('avgback.jpg'); 
-  
-  /* CRITICAL: Keeps the image locked in place during scroll */
-  background-attachment: fixed; 
-  
-  /* Prevents the image from repeating/tiling */
-  background-repeat: no-repeat; 
-  
-  /* Centers the image perfectly */
-  background-position: center center; 
-  
-  /* Stretches the image to fully cover the viewport */
-  background-size: cover; 
+    /* Fallback dark color if image fails to load */
+    background-color: #050505; 
+    background-image: url('avgback.jpg'); 
+    background-attachment: fixed; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    background-size: cover; 
 }
 
 /* Navbar */
@@ -45,9 +36,9 @@ body {
     align-items: center;
     gap: 2rem;
     padding: 1rem 2rem;
-    background: rgba(10, 10, 10, 0.85); /* Darkened and made slightly more transparent */
+    background: rgba(10, 10, 10, 0.85);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(184, 134, 11, 0.2); /* Faint gold bottom line */
+    border-bottom: 1px solid rgba(184, 134, 11, 0.2);
     position: fixed;
     top: 0;
     left: 0;
@@ -79,7 +70,7 @@ body {
     width: 40px;
     height: 40px;
     color: #000;
-    background: linear-gradient(135deg, #FFD700 0%, var(--accent-green) 100%); /* Adjusted gradient for gold */
+    background: linear-gradient(135deg, #FFD700 0%, var(--accent-green) 100%);
     border-radius: 10px;
     box-shadow: 0 0 15px var(--accent-green-dim);
 }
@@ -205,27 +196,34 @@ body {
     .navbar {
         padding: 1rem;
     }
-
     .search-bar {
         display: none;
     }
-
     .user-info,
     .hover-icon {
         display: none;
     }
-
     .nav-left,
     .nav-right {
         gap: 1rem;
     }
-
     .add-title-btn {
         padding: 0.55rem 0.8rem;
     }
+    .grid-header {
+        margin: 90px 0 0 20px !important;
+    }
+    .cards-grid {
+        margin: 20px 0 30px 0 !important;
+        justify-content: center !important;
+    }
 }
 
-.grid-header{
+.main-content {
+    padding-bottom: 40px;
+}
+
+.grid-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -236,152 +234,165 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    gap: 10px;
+    gap: 15px;
     margin: 20px 0 30px 30px;
-}
-
-.details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 6px;
-    padding: 10px 6px 0;
-    width: 100%;
-}
-
-.details p {
-    font-size: 0.75rem;
-    color: var(--text-muted); /* Updated to use global muted text */
-    line-height: 1.5;
-}
-
-.details p b {
-    color: var(--text-main); /* Updated to off-white ivory */
 }
 
 .cards {
     position: relative;
-    width: 220px;
-    margin-bottom: 40px;
+    width: 230px; /* Slightly wider to accommodate text gracefully */
+    margin-bottom: 25px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: rgba(15, 15, 15, 0.75); /* Updated from brown gradient to dark glassmorphism */
-    backdrop-filter: blur(6px); /* Added blur effect */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top highlight edge */
+    background: rgba(15, 15, 15, 0.75);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 22px;
     overflow: hidden;
-    padding: 0 0 12px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.45); /* Shadow color updated slightly to match dark theme */
+    padding: 0 0 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.45);
+    transition: transform 0.2s ease, height 0.3s ease;
 }
 
 .cards .card-image {
     width: 100%;
-    height: 300px;
+    height: 320px;
     object-fit: cover;
     display: block;
     border-radius: 22px 22px 0 0;
     box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45);
 }
 
-.cards:hover{
-    transform: translateY(-3px);
-    transition: transform 0.2s ease;
+.cards:hover {
+    transform: translateY(-5px);
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 12px 12px 0;
+    width: 100%;
+}
+
+.details p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.details p b {
+    color: var(--text-main);
+}
+
+/* --- Read More / Read Less Styles --- */
+.desc-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits to 3 lines initially */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.desc-text.expanded {
+    -webkit-line-clamp: unset; /* Removes limit when expanded */
+    display: block;
+}
+
+.read-more-btn {
+    background: none;
+    border: none;
+    color: var(--accent-green);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 2px;
+    text-align: left;
+    transition: color 0.2s ease;
+    outline: none;
+}
+
+.read-more-btn:hover {
+    color: var(--accent-green-hover);
+    text-decoration: underline;
 }
 
 .footer {
-    background: rgba(10, 10, 10, 0.85); /* Darkened and made slightly more transparent */
-    backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(184, 134, 11, 0.2); /* Faint gold top line */
+    background: rgba(10, 10, 10, 0.95);
+    border-top: 1px solid rgba(184, 134, 11, 0.2);
     color: var(--text-muted);
+    margin-top: 40px;
 }
 
-.footer .copyright {
-    text-align: center;
-    padding: 20px 0;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    border-top: 1px solid rgba(184, 134, 11, 0.2); 
-}
-
-
-
-
-
-  .cinemachine-footer {
-    background-color: #0d0d0d;
-    color: #a0a0a0;
-    padding: 60px 20px 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-top: 1px solid #222;
-    margin-top: 60px;
-  }
-
-  .footer-container {
+.footer-container {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid #222;
-  }
+    padding: 40px 20px;
+}
 
-  .footer-logo {
+.footer-logo {
     color: #ffffff;
     font-size: 1.5rem;
     margin-bottom: 12px;
     letter-spacing: 1px;
-  }
+    font-family: 'Montserrat', sans-serif;
+}
 
-  .footer-desc {
+.footer-desc {
     font-size: 0.9rem;
     line-height: 1.5;
     margin-bottom: 20px;
-  }
+}
 
-  .footer-col h4 {
+.footer-col h4 {
     color: #ffffff;
     font-size: 1.1rem;
     margin-bottom: 16px;
-  }
+}
 
-  .footer-col ul {
+.footer-col ul {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
+}
 
-  .footer-col ul li {
+.footer-col ul li {
     margin-bottom: 10px;
-  }
+}
 
-  .footer-col ul li a, .social-icons a {
+.footer-col ul li a, .social-icons a {
     color: #a0a0a0;
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s ease;
-  }
+}
 
-  .footer-col ul li a:hover, .social-icons a:hover {
-    color: #e50914; /* Netflix/Streaming red accent */
-  }
+.footer-col ul li a:hover, .social-icons a:hover {
+    color: var(--accent-green); 
+}
 
-  .social-icons {
+.social-icons {
     display: flex;
     gap: 15px;
-  }
+}
 
-  .footer-note {
+.footer-note {
     font-size: 0.85rem;
     color: #666;
-  }
+}
 
-  .footer-bottom {
-    max-width: 1200px;
-    margin: 20px auto 0;
+.copyright-banner {
     text-align: center;
+    padding: 20px 0;
     font-size: 0.85rem;
-    color: #666;
-  }
+    color: var(--text-muted);
+    border-top: 1px solid rgba(184, 134, 11, 0.1); 
+    background: rgba(5, 5, 5, 0.95);
+}
