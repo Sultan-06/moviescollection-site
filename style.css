@@ -87,7 +87,9 @@ body {
     list-style: none;
 }
 
-.nav-links a {
+.dropdown-content,
+.dropbtn,
+.nav-links ,li, a {
     color: var(--text-muted);
     text-decoration: none;
     font-size: 0.9rem;
@@ -220,7 +222,7 @@ body {
 }
 
 .main-content {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 
 .grid-header {
@@ -241,7 +243,7 @@ body {
 .cards {
     position: relative;
     width: 230px; /* Slightly wider to accommodate text gracefully */
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -396,3 +398,24 @@ body {
     border-top: 1px solid rgba(184, 134, 11, 0.1); 
     background: rgba(5, 5, 5, 0.95);
 }
+
+.dropdown {
+  position: relative;
+  text-decoration: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
