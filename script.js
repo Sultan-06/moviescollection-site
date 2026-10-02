@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    const browseDropdown = document.querySelector('.dropdown');
+    const browseButton = browseDropdown?.querySelector('.dropbtn');
+
+    if (browseDropdown && browseButton) {
+        browseButton.addEventListener('click', () => {
+            const isExpanded = browseButton.getAttribute('aria-expanded') === 'true';
+            browseButton.setAttribute('aria-expanded', String(!isExpanded));
+            browseDropdown.classList.toggle('open', !isExpanded);
+        });
+
+        document.addEventListener('click', event => {
+            if (!browseDropdown.contains(event.target)) {
+                browseDropdown.classList.remove('open');
+                browseButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
     
     // 1. READ MORE / READ LESS LOGIC
     // Select all the 'Read More' buttons inside the cards
