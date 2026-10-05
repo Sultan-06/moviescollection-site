@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08090d">
+  <title>My Library | Frame</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #08090d;
+      color: #e2e8f0;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      background: radial-gradient(ellipse at top, #131629 0, #08090d 55%);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(8, 9, 13, 0.88);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1200px, 100%);
+      min-height: 68px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 750;
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-icon {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 10px;
+      background: #4f46e5;
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      padding: 9px 13px;
+      border-radius: 8px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .search {
+      width: min(230px, 24vw);
+      padding: 9px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      outline: none;
+      color: #fff;
+      background: #11131a;
+    }
+
+    .search::placeholder {
+      color: #64748b;
+    }
+
+    .search:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+    }
+
+    main {
+      width: min(1200px, 100%);
+      min-height: calc(100vh - 68px);
+      margin: 0 auto;
+      padding: 42px 24px 64px;
+    }
+
+    .page-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: clamp(1.8rem, 4vw, 2.25rem);
+      letter-spacing: -0.04em;
+    }
+
+    .count {
+      margin: 0;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-button {
+      flex: 0 0 auto;
+      padding: 9px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      color: #94a3b8;
+      background: #11131a;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+
+    .filter-button:hover {
+      color: #fff;
+      background: #1c2030;
+    }
+
+    .filter-button[aria-pressed="true"] {
+      border-color: #fff;
+      color: #08090d;
+      background: #fff;
+    }
+
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 26px 18px;
+    }
+
+    .media-card {
+      min-width: 0;
+    }
+
+    .poster {
+      position: relative;
+      display: grid;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .media-card:hover .poster {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .poster::after {
+      position: absolute;
+      inset: 30% 0 0;
+      background: linear-gradient(transparent, rgba(5, 7, 14, 0.7));
+      content: "";
+    }
+
+    .poster-mark {
+      z-index: 1;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 3.4rem;
+      font-weight: 800;
+      text-shadow: 0 3px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .poster-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      padding: 5px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 5px;
+      color: #fff;
+      background: rgba(8, 9, 13, 0.65);
+      font-size: 0.62rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card-actions {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .media-card:hover .card-actions,
+    .media-card:focus-within .card-actions {
+      opacity: 1;
+    }
+
+    .icon-button {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(8, 9, 13, 0.72);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .icon-button:hover {
+      background: rgba(30, 35, 52, 0.95);
+    }
+
+    .favorite-button[aria-pressed="true"] {
+      border-color: rgba(239, 68, 68, 0.55);
+      color: #fb7185;
+    }
+
+    .remove-button:hover {
+      border-color: rgba(239, 68, 68, 0.6);
+      color: #fca5a5;
+    }
+
+    .media-title {
+      overflow: hidden;
+      margin: 11px 2px 5px;
+      color: #f1f5f9;
+      font-size: 0.9rem;
+      font-weight: 650;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .media-year {
+      margin: 0 2px;
+      color: #64748b;
+      font-size: 0.78rem;
+    }
+
+    .empty-state {
+      padding: 100px 20px;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    .empty-state[hidden] {
+      display: none;
+    }
+
+    .empty-state h2 {
+      margin: 0 0 8px;
+      color: #fff;
+    }
+
+    .empty-state p {
+      margin: 0 auto;
+      max-width: 430px;
+      line-height: 1.6;
+    }
+
+    .clear-button {
+      margin-top: 20px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: #4f46e5;
+      cursor: pointer;
+    }
+
+    .clear-button:hover {
+      background: #6366f1;
+    }
+
+    @media (max-width: 1000px) {
+      .library-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 16px;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+      }
+
+      .nav-links a {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+      }
+
+      .search {
+        width: min(220px, 55vw);
+      }
+
+      main {
+        padding: 30px 16px 48px;
+      }
+
+      .page-heading {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      .library-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px 14px;
+      }
+
+      .card-actions {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html">
+        <span class="brand-icon" aria-hidden="true">▶</span>
+        <span>Frame</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Overview</a>
+        <a href="mylibrary.html" aria-current="page">My Library</a>
+        <a href="../index.html#watchlist">Watchlist</a>
+        <a href="../index.html#collections">Collections</a>
+      </div>
+      <input class="search" id="library-search" type="search" placeholder="Search library..." aria-label="Search library">
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">My Library</h1>
+        <p class="count" id="item-count" aria-live="polite"></p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter library by category">
+        <button class="filter-button" type="button" data-category="All" aria-pressed="true">All</button>
+        <button class="filter-button" type="button" data-category="Movies" aria-pressed="false">Movies</button>
+        <button class="filter-button" type="button" data-category="TV Shows" aria-pressed="false">TV Shows</button>
+        <button class="filter-button" type="button" data-category="Anime" aria-pressed="false">Anime</button>
+        <button class="filter-button" type="button" data-category="Favorites" aria-pressed="false">Favorites</button>
+      </div>
+    </section>
+
+    <section class="library-grid" id="library-grid" aria-label="Media in your library"></section>
+    <section class="empty-state" id="empty-state" hidden>
+      <h2>No media found</h2>
+      <p>There are no items matching your current filters or search. Try adjusting them or clear your filters.</p>
+      <button class="clear-button" id="clear-filters" type="button">Clear Filters</button>
+    </section>
+  </main>
+
+  <script>
+    const mediaItems = [
+      { id: 1, title: 'Spider-Man: Across the Spider-Verse', year: 2023, type: 'Movies', favorite: true, gradient: 'linear-gradient(140deg, #7f1d1d, #1e3a8a)', mark: 'SP' },
+      { id: 2, title: 'Daredevil', year: 2015, type: 'TV Shows', favorite: true, gradient: 'linear-gradient(140deg, #450a0a, #991b1b)', mark: 'DD' },
+      { id: 3, title: 'Jujutsu Kaisen', year: 2020, type: 'Anime', favorite: false, gradient: 'linear-gradient(140deg, #312e81, #581c87)', mark: '呪' },
+      { id: 4, title: 'Bloodhounds', year: 2023, type: 'TV Shows', favorite: false, gradient: 'linear-gradient(140deg, #1e293b, #7f1d1d)', mark: 'BH' },
+      { id: 5, title: 'Patema Inverted', year: 2013, type: 'Anime', favorite: true, gradient: 'linear-gradient(140deg, #164e63, #1e3a8a)', mark: 'PI' },
+      { id: 6, title: 'The Batman', year: 2022, type: 'Movies', favorite: false, gradient: 'linear-gradient(140deg, #0f172a, #292524)', mark: '蝙' },
+      { id: 7, title: 'Cyberpunk: Edgerunners', year: 2022, type: 'Anime', favorite: true, gradient: 'linear-gradient(140deg, #854d0e, #581c87)', mark: '2077' },
+      { id: 8, title: 'Severance', year: 2022, type: 'TV Shows', favorite: false, gradient: 'linear-gradient(140deg, #134e4a, #1e293b)', mark: 'S' },
+      { id: 9, title: 'Dune: Part Two', year: 2024, type: 'Movies', favorite: true, gradient: 'linear-gradient(140deg, #9a3412, #78350f)', mark: 'DUNE' },
+      { id: 10, title: 'Attack on Titan', year: 2013, type: 'Anime', favorite: true, gradient: 'linear-gradient(140deg, #7f1d1d, #44403c)', mark: '進' }
+    ];
+
+    const grid = document.getElementById('library-grid');
+    const searchInput = document.getElementById('library-search');
+    const count = document.getElementById('item-count');
+    const emptyState = document.getElementById('empty-state');
+    let activeCategory = 'All';
+
+    function renderLibrary() {
+      const query = searchInput.value.trim().toLowerCase();
+      const visibleItems = mediaItems.filter(item => {
+        const matchesCategory = activeCategory === 'All'
+          || (activeCategory === 'Favorites' ? item.favorite : item.type === activeCategory);
+        return matchesCategory && item.title.toLowerCase().includes(query);
+      });
+
+      grid.replaceChildren(...visibleItems.map(item => {
+        const card = document.createElement('article');
+        card.className = 'media-card';
+
+        const poster = document.createElement('div');
+        poster.className = 'poster';
+        poster.style.background = item.gradient;
+
+        const mark = document.createElement('span');
+        mark.className = 'poster-mark';
+        mark.setAttribute('aria-hidden', 'true');
+        mark.textContent = item.mark;
+
+        const tag = document.createElement('span');
+        tag.className = 'poster-tag';
+        tag.textContent = item.type;
+
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+
+        const favoriteButton = document.createElement('button');
+        favoriteButton.className = 'icon-button favorite-button';
+        favoriteButton.type = 'button';
+        favoriteButton.setAttribute('aria-label', item.favorite ? 'Remove from favorites' : 'Add to favorites');
+        favoriteButton.setAttribute('aria-pressed', String(item.favorite));
+        favoriteButton.textContent = item.favorite ? '♥' : '♡';
+        favoriteButton.addEventListener('click', () => {
+          item.favorite = !item.favorite;
+          renderLibrary();
+        });
+
+        const removeButton = document.createElement('button');
+        removeButton.className = 'icon-button remove-button';
+        removeButton.type = 'button';
+        removeButton.setAttribute('aria-label', `Remove ${item.title} from library`);
+        removeButton.textContent = '×';
+        removeButton.addEventListener('click', () => {
+          mediaItems.splice(mediaItems.indexOf(item), 1);
+          renderLibrary();
+        });
+
+        actions.append(favoriteButton, removeButton);
+        poster.append(mark, tag, actions);
+
+        const title = document.createElement('h2');
+        title.className = 'media-title';
+        title.textContent = item.title;
+
+        const year = document.createElement('p');
+        year.className = 'media-year';
+        year.textContent = String(item.year);
+
+        card.append(poster, title, year);
+        return card;
+      }));
+
+      count.textContent = `Showing ${visibleItems.length} of ${mediaItems.length} items in your collection.`;
+      emptyState.hidden = visibleItems.length > 0;
+      grid.hidden = visibleItems.length === 0;
+    }
+
+    document.querySelectorAll('.filter-button').forEach(button => {
+      button.addEventListener('click', () => {
+        activeCategory = button.dataset.category;
+        document.querySelectorAll('.filter-button').forEach(filter => {
+          filter.setAttribute('aria-pressed', String(filter === button));
+        });
+        renderLibrary();
+      });
+    });
+
+    searchInput.addEventListener('input', renderLibrary);
+    document.getElementById('clear-filters').addEventListener('click', () => {
+      activeCategory = 'All';
+      searchInput.value = '';
+      document.querySelectorAll('.filter-button').forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.category === 'All'));
+      });
+      renderLibrary();
+    });
+
+    renderLibrary();
+  </script>
+</body>
+</html>
