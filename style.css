@@ -404,8 +404,9 @@ body {
 
 .card-year {
     margin: 0 2px;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 0.85rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
 }
 
 
