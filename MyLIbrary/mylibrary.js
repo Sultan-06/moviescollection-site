@@ -14,13 +14,15 @@ let activeWatchedFilter = searchParams.get('watchedFilter') === 'Favorites' ? 'F
 const transferredItem = searchParams.get('item');
 if (transferredItem) {
   let item;
+  const targetSection = activeCategory === 'All' ? 'My Library' : activeCategory;
+
   try {
     item = JSON.parse(transferredItem);
   } catch {
-    throw new Error('The selected title could not be added because its transfer data is invalid.');
+    throw new Error(`The selected title could not be added to ${targetSection} because its transferred data is invalid.`);
   }
   if (!item || typeof item.title !== 'string' || !['Movies', 'TV Shows', 'Anime'].includes(item.type)) {
-    throw new Error('The selected title could not be added because its transfer data is invalid.');
+    throw new Error(`The selected title could not be added to ${targetSection} because its transferred data is invalid.`);
   }
   window.FrameLibrary.addToSection(item, activeCategory);
   searchParams.delete('item');

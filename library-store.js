@@ -13,6 +13,19 @@
         { id: 'attack-on-titan', title: 'Attack on Titan', year: 2013, type: 'Anime', favorite: true, watched: false, gradient: 'linear-gradient(140deg, #7f1d1d, #44403c)', mark: '進' }
     ];
 
+    function getSectionLabel(section) {
+        const labels = {
+            All: 'My Library',
+            Movies: 'Movies',
+            'TV Shows': 'TV Shows',
+            Anime: 'Anime',
+            Watched: 'Watched',
+            Favorites: 'Favorites'
+        };
+
+        return labels[section] || 'your library';
+    }
+
     function saveItems(items) {
         localStorage.setItem(storageKey, JSON.stringify(items));
     }
@@ -27,7 +40,7 @@
 
         const items = JSON.parse(storedItems);
         if (!Array.isArray(items) || items.some(item => !item || typeof item.title !== 'string')) {
-            throw new Error('Saved library data is invalid. Clear the frame-library-items entry from local storage to reset it.');
+            throw new Error(`Saved ${getSectionLabel('All')} data is invalid. Clear the frame-library-items entry from local storage to reset it.`);
         }
 
         return items;
@@ -58,7 +71,7 @@
     function updateItem(title, updates) {
         const items = getItems();
         const item = items.find(entry => entry.title === title);
-        if (!item) throw new Error(`Cannot update "${title}": item is not in your library.`);
+        if (!item) throw new Error(`Cannot update "${title}" in ${getSectionLabel('All')} because it is not in your collection.`);
         Object.assign(item, updates);
         saveItems(items);
     }
