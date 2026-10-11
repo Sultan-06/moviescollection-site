@@ -21,13 +21,16 @@
                     <div class="logo-icon"><i class="fa-solid fa-play"></i></div>
                     <span>Frame</span>
                 </div>
+            </div>
+
+            <div class="nav-menu" id="mobileNavMenu">
                 <ul class="nav-links">
                     <li class="active"><a href="#">Overview</a></li>
                     <li><a href="MyLIbrary/mylibrary.html">My Library</a></li>
                     <li><a href="MyLIbrary/mylibrary.html?section=Watched">Watched</a></li>
                     <li><a href="#">Collections</a></li>
                 </ul>
-                <li class="dropdown">
+                <div class="dropdown">
                     <button type="button" class="dropbtn" aria-expanded="false" aria-haspopup="true">
                         Browse <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </button>
@@ -36,16 +39,17 @@
                         <li><a href="#">NEW</a></li>
                         <li><a href="#">PAGE</a></li>
                     </ul>
-                </li>
+                </div>
             </div>
-            
+
             <div class="nav-right">
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search your library">
+                    <input type="text" placeholder="Search Cinema">
                 </div>
-                <button class="add-title-btn">
-                    <i class="fa-solid fa-magnifying-glass"></i> Search
+                <button class="add-title-btn" aria-label="Search">
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    <span>Search</span>
                 </button>
                 <div class="user-profile">
                     <!-- Added a label around the image linked to the hidden file input so the JS avatar logic works -->
@@ -58,7 +62,9 @@
                         <span class="user-name">Zaki Sultan</span>
                         <span class="user-plan">Creator</span>
                     </div>
-                    <i class="fa-solid fa-ellipsis hover-icon"></i>
+                    <button type="button" class="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNavMenu">
+                        <i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
         </nav>

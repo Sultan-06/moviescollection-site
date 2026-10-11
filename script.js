@@ -111,6 +111,37 @@ const moviesData = [
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    const navbar = document.querySelector('.navbar');
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileNavMenu = document.getElementById('mobileNavMenu');
+
+    function closeMobileMenu() {
+        navbar?.classList.remove('menu-open');
+        mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle?.setAttribute('aria-label', 'Open navigation menu');
+    }
+
+    if (navbar && mobileMenuToggle && mobileNavMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+            mobileMenuToggle.setAttribute('aria-label', isExpanded ? 'Open navigation menu' : 'Close navigation menu');
+            navbar.classList.toggle('menu-open', !isExpanded);
+        });
+
+        mobileNavMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        document.addEventListener('click', event => {
+            if (!navbar.contains(event.target)) closeMobileMenu();
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeMobileMenu();
+        });
+    }
+
     // --- 1. DROPDOWN LOGIC ---
     const browseDropdown = document.querySelector('.dropdown');
     const browseButton = browseDropdown?.querySelector('.dropbtn');
