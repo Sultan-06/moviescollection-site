@@ -19,22 +19,24 @@
                     <div class="logo-icon"><i class="fa-solid fa-play"></i></div>
                     <span>Frame</span>
                 </div>
-                <ul class="nav-links">
-                    <li class="active"><a href="../index.html">Overview</a></li>
-                    <li><a href="mylibrary.html">My Library</a></li>
-                    <li><a href="mylibrary.html?section=Watched">Watched</a></li>
-                    <li><a href="#">Collections</a></li>
-                </ul>
-                <li class="dropdown">
-                    <button type="button" class="dropbtn" aria-expanded="false" aria-haspopup="true">
-                        Browse <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-                    </button>
-                    <ul class="dropdown-content">
-                        <li><a href="#">WEB</a></li>
-                        <li><a href="#">NEW</a></li>
-                        <li><a href="#">PAGE</a></li>
+                <div class="nav-menu" id="libraryNavMenu">
+                    <ul class="nav-links">
+                        <li class="active"><a href="../index.html">Overview</a></li>
+                        <li><a href="mylibrary.html">My Library</a></li>
+                        <li><a href="mylibrary.html?section=Watched">Watched</a></li>
+                        <li><a href="#">Collections</a></li>
                     </ul>
-                </li>
+                    <div class="dropdown">
+                        <button type="button" class="dropbtn" aria-expanded="false" aria-haspopup="true">
+                            Browse <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-content">
+                            <li><a href="#">WEB</a></li>
+                            <li><a href="#">NEW</a></li>
+                            <li><a href="#">PAGE</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
             <div class="nav-right">
@@ -57,7 +59,9 @@
                         <span class="user-name">Zaki Sultan</span>
                         <span class="user-plan">Creator</span>
                     </div>
-                    <i class="fa-solid fa-ellipsis hover-icon"></i>
+                    <button type="button" class="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="libraryNavMenu">
+                        <i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
         </nav>

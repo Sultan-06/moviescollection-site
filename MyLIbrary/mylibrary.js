@@ -5,6 +5,9 @@ const emptyState = document.getElementById('empty-state');
 const filterButtons = [...document.querySelectorAll('[data-category]')];
 const watchedFilters = document.querySelector('.watched-filters');
 const watchedFilterButtons = [...document.querySelectorAll('[data-watched-filter]')];
+const navbar = document.querySelector('.navbar');
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const mobileNavMenu = document.getElementById('libraryNavMenu');
 const availableSections = filterButtons.map(button => button.dataset.category);
 const searchParams = new URLSearchParams(window.location.search);
 const requestedSection = searchParams.get('section');
@@ -31,6 +34,50 @@ if (transferredItem) {
 }
 
 let mediaItems = window.FrameLibrary.getItems();
+
+function closeMobileMenu() {
+  navbar?.classList.remove('menu-open');
+  mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+  mobileMenuToggle?.setAttribute('aria-label', 'Open navigation menu');
+}
+
+if (navbar && mobileMenuToggle && mobileNavMenu) {
+  mobileMenuToggle.addEventListener('click', () => {
+    const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+    mobileMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenuToggle.setAttribute('aria-label', isExpanded ? 'Open navigation menu' : 'Close navigation menu');
+    navbar.classList.toggle('menu-open', !isExpanded);
+  });
+
+  mobileNavMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  document.addEventListener('click', event => {
+    if (!navbar.contains(event.target)) closeMobileMenu();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMobileMenu();
+  });
+}
+
+const browseDropdown = document.querySelector('.dropdown');
+const browseButton = browseDropdown?.querySelector('.dropbtn');
+if (browseDropdown && browseButton) {
+  browseButton.addEventListener('click', () => {
+    const isExpanded = browseButton.getAttribute('aria-expanded') === 'true';
+    browseButton.setAttribute('aria-expanded', String(!isExpanded));
+    browseDropdown.classList.toggle('open', !isExpanded);
+  });
+
+  document.addEventListener('click', event => {
+    if (!browseDropdown.contains(event.target)) {
+      browseDropdown.classList.remove('open');
+      browseButton.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
 
 function updateSectionUrl() {
   const url = new URL(window.location.href);
