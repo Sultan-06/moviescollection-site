@@ -390,24 +390,6 @@ body {
     }
 }
 
-@media (min-width: 1480px) {
-    .cards-grid {
-        grid-template-columns: repeat(7, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1720px) {
-    .cards-grid {
-        grid-template-columns: repeat(8, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1960px) {
-    .cards-grid {
-        grid-template-columns: repeat(9, minmax(0, 1fr));
-    }
-}
-
 .cards {
     position: relative;
     width: 100%;
