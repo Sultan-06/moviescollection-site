@@ -70,6 +70,101 @@
     </div>
 
     <div class="main-content">
+        <section class="featured-slider" aria-label="Trending movies and series" tabindex="0">
+            <article class="featured-slide is-active" data-title="Spider-Man: Into the Spider-Verse" aria-hidden="false">
+                <img class="featured-image" src="images/c1.jpg" alt="" fetchpriority="high">
+                <div class="featured-copy">
+                    <p class="featured-eyebrow"><i class="fa-solid fa-fire" aria-hidden="true"></i> TRENDING MOVIE</p>
+                    <h1>Spider-Man: Into the Spider-Verse</h1>
+                    <div class="featured-meta" aria-label="Rating 8.4 out of 10, HD, movie, released 2018">
+                        <span class="featured-rating"><i class="fa-solid fa-star" aria-hidden="true"></i> 8.4</span>
+                        <span><i class="fa-solid fa-display" aria-hidden="true"></i> HD</span>
+                        <span><i class="fa-solid fa-film" aria-hidden="true"></i> MOVIE</span>
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2018</span>
+                    </div>
+                    <p class="featured-description">Every universe has its own Spider-Man. Miles Morales is about to meet them all.</p>
+                    <button class="featured-explore" type="button">
+                        <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        <span>PLAY</span>
+                    </button>
+                    <button class="featured-details" type="button">
+                        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                        <span>Details</span>
+                    </button>
+                </div>
+            </article>
+            <article class="featured-slide" data-title="Spider-Man: Across the Spider-Verse" aria-hidden="true">
+                <img class="featured-image" src="images/c3.jpg" alt="">
+                <div class="featured-copy">
+                    <p class="featured-eyebrow"><i class="fa-solid fa-fire" aria-hidden="true"></i> TRENDING MOVIE</p>
+                    <h2>Spider-Man: Across the Spider-Verse</h2>
+                    <div class="featured-meta" aria-label="Rating 8.7 out of 10, 4K, movie, released 2023">
+                        <span class="featured-rating"><i class="fa-solid fa-star" aria-hidden="true"></i> 8.7</span>
+                        <span><i class="fa-solid fa-display" aria-hidden="true"></i> 4K</span>
+                        <span><i class="fa-solid fa-film" aria-hidden="true"></i> MOVIE</span>
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2023</span>
+                    </div>
+                    <p class="featured-description">Miles swings into a multiverse of Spider-People and discovers that every choice has a cost.</p>
+                    <button class="featured-explore" type="button">
+                        <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        <span>PLAY</span>
+                    </button>
+                    <button class="featured-details" type="button">
+                        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                        <span>Details</span>
+                    </button>
+                </div>
+            </article>
+            <article class="featured-slide" data-title="Spider-Man: No Way Home" aria-hidden="true">
+                <img class="featured-image" src="images/c5.jpg" alt="">
+                <div class="featured-copy">
+                    <p class="featured-eyebrow"><i class="fa-solid fa-fire" aria-hidden="true"></i> FAN FAVORITE</p>
+                    <h2>Spider-Man: No Way Home</h2>
+                    <div class="featured-meta" aria-label="Rating 8.2 out of 10, HD, movie, released 2021">
+                        <span class="featured-rating"><i class="fa-solid fa-star" aria-hidden="true"></i> 8.2</span>
+                        <span><i class="fa-solid fa-display" aria-hidden="true"></i> HD</span>
+                        <span><i class="fa-solid fa-film" aria-hidden="true"></i> MOVIE</span>
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2021</span>
+                    </div>
+                    <p class="featured-description">With his identity revealed, Peter asks for help—and opens the door to unexpected visitors.</p>
+                    <button class="featured-explore" type="button">
+                        <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        <span>PLAY</span>
+                    </button>
+                    <button class="featured-details" type="button">
+                        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                        <span>Details</span>
+                    </button>
+                </div>
+            </article>
+
+            <div class="featured-controls">
+                <div class="featured-arrows">
+                    <button class="featured-arrow featured-previous" type="button" aria-label="Previous featured title">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    </button>
+                    <button class="featured-arrow featured-next" type="button" aria-label="Next featured title">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="featured-dots" role="group" aria-label="Choose a featured title">
+                    <button class="featured-dot is-active" type="button" aria-label="Show Spider-Man: Into the Spider-Verse" aria-current="true"></button>
+                    <button class="featured-dot" type="button" aria-label="Show Spider-Man: Across the Spider-Verse" aria-current="false"></button>
+                    <button class="featured-dot" type="button" aria-label="Show Spider-Man: No Way Home" aria-current="false"></button>
+                </div>
+            </div>
+
+            <dialog class="featured-details-dialog" aria-labelledby="featured-details-title">
+                <button class="featured-details-close" type="button" aria-label="Close details">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+                <p class="featured-eyebrow">TITLE DETAILS</p>
+                <h2 id="featured-details-title"></h2>
+                <p class="featured-details-description"></p>
+                <div class="featured-details-meta"></div>
+            </dialog>
+        </section>
+
        <div class="grid-header">
            <!-- <h3>RECOMMENDED FOR YOU</h3> -->
         </div>

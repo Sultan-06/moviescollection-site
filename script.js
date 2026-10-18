@@ -161,6 +161,89 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const featuredSlider = document.querySelector('.featured-slider');
+    if (featuredSlider) {
+        const slides = Array.from(featuredSlider.querySelectorAll('.featured-slide'));
+        const dots = Array.from(featuredSlider.querySelectorAll('.featured-dot'));
+        const detailsDialog = featuredSlider.querySelector('.featured-details-dialog');
+        const detailsTitle = detailsDialog.querySelector('#featured-details-title');
+        const detailsDescription = detailsDialog.querySelector('.featured-details-description');
+        const detailsMeta = detailsDialog.querySelector('.featured-details-meta');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let activeSlide = 0;
+
+        function showFeaturedSlide(index) {
+            activeSlide = (index + slides.length) % slides.length;
+            slides.forEach((slide, slideIndex) => {
+                const isActive = slideIndex === activeSlide;
+                slide.classList.toggle('is-active', isActive);
+                slide.setAttribute('aria-hidden', String(!isActive));
+                dots[slideIndex].classList.toggle('is-active', isActive);
+                dots[slideIndex].setAttribute('aria-current', String(isActive));
+            });
+        }
+
+        function showFeaturedDetails(slide) {
+            detailsTitle.textContent = slide.querySelector('h1, h2').textContent;
+            detailsDescription.textContent = slide.querySelector('.featured-description').textContent;
+            detailsMeta.replaceChildren(...Array.from(
+                slide.querySelectorAll('.featured-meta span'),
+                item => item.cloneNode(true)
+            ));
+            detailsDialog.showModal();
+        }
+
+        featuredSlider.querySelector('.featured-previous')?.addEventListener('click', () => {
+            showFeaturedSlide(activeSlide - 1);
+        });
+        featuredSlider.querySelector('.featured-next')?.addEventListener('click', () => {
+            showFeaturedSlide(activeSlide + 1);
+        });
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showFeaturedSlide(index));
+        });
+        featuredSlider.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                showFeaturedSlide(activeSlide - 1);
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                showFeaturedSlide(activeSlide + 1);
+            }
+        });
+        featuredSlider.querySelectorAll('.featured-explore').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                const title = slides[index].dataset.title;
+                const card = Array.from(document.querySelectorAll('.media-card'))
+                    .find(mediaCard => mediaCard.dataset.title === title);
+                if (card) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.focus({ preventScroll: true });
+                }
+            });
+        });
+        featuredSlider.querySelectorAll('.featured-details').forEach((button, index) => {
+            button.addEventListener('click', () => showFeaturedDetails(slides[index]));
+        });
+        detailsDialog.querySelector('.featured-details-close').addEventListener('click', () => {
+            detailsDialog.close();
+        });
+
+        const autoSlide = window.setInterval(() => {
+            if (
+                !document.hidden &&
+                !featuredSlider.matches(':hover') &&
+                !(
+                    featuredSlider.contains(document.activeElement) &&
+                    document.activeElement.matches(':focus-visible')
+                ) &&
+                !reducedMotion.matches
+            ) {
+                showFeaturedSlide(activeSlide + 1);
+            }
+        }, 3500);
+    }
+
     const gridContainer = document.getElementById('movieGrid');
 
     function toLibraryItem(movie) {
@@ -189,6 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gridContainer.replaceChildren(...moviesData.map(movie => {
             const card = document.createElement('article');
             card.className = 'media-card';
+            card.dataset.title = movie.title;
+            card.tabIndex = -1;
 
             const poster = document.createElement('div');
             poster.className = 'cards';
