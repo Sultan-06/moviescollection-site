@@ -9,6 +9,33 @@ const moviesData = [
         favorite: false
     },
     {
+        title: "The Avengers",
+        year: "2012",
+        category: "MOVIES",
+        image: "images/pos1.jpg",
+        fallback: "https://placehold.co/300x450/111/fff?text=The+Avengers",
+        alt: "The Avengers",
+        favorite: false
+    },
+    {
+        title: "The Batman",
+        year: "2022",
+        category: "MOVIES",
+        image: "images/pos2-banner.jpg",
+        fallback: "https://placehold.co/300x450/111/fff?text=The+Batman",
+        alt: "The Batman",
+        favorite: false
+    },
+    {
+        title: "Moon Knight",
+        year: "2022",
+        category: "TV",
+        image: "images/pos3-banner.jpg",
+        fallback: "https://placehold.co/300x450/111/fff?text=Moon+Knight",
+        alt: "Moon Knight",
+        favorite: false
+    },
+    {
         title: "Spider-Man: Across the Spider-Verse",
         year: "2023",
         category: "MOVIES",
